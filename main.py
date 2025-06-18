@@ -9,7 +9,6 @@ from pathlib import Path
 import asyncio
 from auth import auth_router
 from auth.database import Database
-import os
 
 app = FastAPI()
 
@@ -42,11 +41,6 @@ async def upload_and_process(
     start_time: str = Form(...),
     end_time: str = Form(...)
 ):
-    # Clear trigger_data.json at the start of a new upload
-    data_path = Path(__file__).parent.parent / "backend/trigger_data.json"
-    with open(data_path, "w") as f:
-        json.dump([], f)
-
     print("📥 Received:")
     print("script:", script)
     print("timeframe:", timeframe)
@@ -151,24 +145,3 @@ async def trigger_tradingview(request: Request):
         return {"status": "success", "message": "TradingView script triggered"}
     except Exception as e:
         return {"status": "error", "message": str(e)}
-
-@app.post("/append-trigger")
-async def append_trigger(request: Request):
-    data = await request.json()
-    data_path = Path(__file__).parent.parent / "backend/trigger_data.json"
-    # Load existing triggers or start a new list
-    if os.path.exists(data_path):
-        with open(data_path, "r") as f:
-            try:
-                triggers = json.load(f)
-                if not isinstance(triggers, list):
-                    triggers = [triggers]
-            except Exception:
-                triggers = []
-    else:
-        triggers = []
-    # Append new trigger
-    triggers.append(data)
-    with open(data_path, "w") as f:
-        json.dump(triggers, f, indent=2)
-    return {"status": "ok", "message": "Trigger appended."}

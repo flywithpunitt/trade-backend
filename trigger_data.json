@@ -1,1 +1,12 @@
-[]
+{
+  "symbol": "AUDCAD",
+  "timeframe": "15",
+  "price": "0.88568",
+  "volume": 1067,
+  "timestamp": "2025-06-02 12:00:00",
+  "source": "click",
+  "trendline_color": "#000000",
+  "jwt_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4Mzk2MWI2MDg2YjI5OWU2ZDcwOThjMSIsImVtYWlsIjoic2hpdmFtQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1MDE0MTg5NiwiZXhwIjoxNzUwMjI4Mjk2fQ.T-J-m7YaAlWDD0dez0ILMBzBm6AgQGNVlvXdol_oDIU",
+  "start_time": "2025-06-02 12:00",
+  "end_time": "2025-06-02 14:00"
+}

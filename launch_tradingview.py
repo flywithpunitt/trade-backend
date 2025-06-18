@@ -118,9 +118,16 @@ def open_tradingview():
     print("🚀 Opening TradingView...")
 
     with sync_playwright() as p:
-        browser = p.chromium.connect_over_cdp("http://127.0.0.1:9222")
-        context = browser.contexts[0]
-        page = context.pages[0] if context.pages else context.new_page()
+        browser = p.chromium.launch_persistent_context(
+            USER_DATA_DIR,
+            headless=False,
+            slow_mo=100,
+            args=[
+                "--disable-session-crashed-bubble",     # Remove restore popup
+                "--no-default-browser-check"            # No default browser warning
+            ]
+        )
+        page = browser.pages[0] if browser.pages else browser.new_page()
         page.goto(TRADINGVIEW_URL)
         page.wait_for_timeout(6000)
         print("🌐 TradingView.com opened")
