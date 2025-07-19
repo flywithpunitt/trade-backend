@@ -15,8 +15,11 @@ app = FastAPI()
 # ✅ Allow frontend (Vite) to talk to backend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173",  # for local dev
-        "https://trading-frontend-gamma.vercel.app"],
+    allow_origins=[
+        "http://localhost:5173",  # for local dev
+        "https://trading-frontend-gamma.vercel.app",
+        "https://newfrontend-kohl.vercel.app",  # ✅ added new frontend
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
